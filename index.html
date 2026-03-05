@@ -3,205 +3,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Monthsary My Love</title>
+    <title>Our Private Vault 💜</title>
     <style>
         :root {
             --bg: #f3e5f5;
-            --gift-color: #7b1fa2;
-            --gift-ribbon: #ffeb3b;
+            --primary: #7b1fa2;
+            --secondary: #4a148c;
             --paper: #ffffff;
             --text: #311b92;
-            --heart-color: #9c27b0;
         }
 
         body, html {
             margin: 0; padding: 0;
-            width: 100%; height: 100%;
+            height: 100%; width: 100%;
             background-color: var(--bg);
             font-family: 'Georgia', serif;
-            overflow-x: hidden;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden;
         }
 
-        /* GIFT OVERLAY */
-        #gift-container {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            cursor: pointer;
-            transition: opacity 0.6s ease;
-        }
+        .hidden { display: none !important; }
 
-        .gift-box {
-            font-size: 10rem;
-            animation: wobble 2s infinite;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
-        }
-
-        @keyframes wobble {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            25% { transform: rotate(-5deg) scale(1.05); }
-            75% { transform: rotate(5deg) scale(1.05); }
-        }
-
-        .tap-text {
-            margin-top: 20px;
-            color: var(--gift-color);
-            font-weight: bold;
-            font-family: sans-serif;
-            letter-spacing: 2px;
-            animation: fade 1.5s infinite alternate;
-        }
-
-        @keyframes fade { from { opacity: 0.4; } to { opacity: 1; } }
-
-        /* CONTENT SECTIONS */
-        .page-section {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--paper);
-            display: none;
-            overflow-y: auto;
-            z-index: 10;
-        }
-
-        .content-padding {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 80px 30px;
+        /* PASSWORD SCREEN */
+        #password-screen {
             text-align: center;
-            color: var(--text);
-            line-height: 1.8;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(106, 13, 173, 0.2);
+            z-index: 1000;
         }
 
-        /* PHOTO GALLERY */
-        .photo-grid {
+        input {
+            padding: 12px;
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        /* COUNTER BOX */
+        .counter-box {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--primary);
+        }
+
+        #timer {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* GIFT ANIMATION */
+        .gift-container {
+            font-size: 8rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* NAVIGATION CARDS */
+        .menu-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 30px;
+            gap: 20px;
+            margin-top: 20px;
         }
 
-        .photo-grid img {
-            width: 100%;
-            border-radius: 10px;
-            border: 5px solid var(--bg);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        /* BUTTONS */
-        .nav-btn {
-            background: var(--gift-color);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1rem;
-            border-radius: 50px;
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
             cursor: pointer;
-            margin: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(123, 31, 162, 0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .card:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--primary);
+        }
+
+        /* FULL PAGE OVERLAYS */
+        .full-page {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--paper); overflow-y: auto; padding: 60px 20px;
+            box-sizing: border-box; z-index: 2000;
+            color: var(--text);
         }
 
         .close-btn {
-            position: fixed;
-            top: 20px; right: 20px;
-            z-index: 100;
-            background: rgba(123, 31, 162, 0.8);
+            position: fixed; top: 20px; left: 20px;
+            background: var(--primary); color: white;
+            border: none; padding: 10px 20px; border-radius: 20px;
+            cursor: pointer; font-weight: bold;
         }
 
-        /* FLOATING HEARTS */
+        /* TIMELINE STYLING */
+        .timeline {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: left;
+            border-left: 2px solid var(--primary);
+            padding-left: 20px;
+        }
+
+        .timeline-item {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "💜";
+            position: absolute;
+            left: -31px;
+            top: 0;
+            background: var(--bg);
+        }
+
+        /* HEART RAIN */
         .heart {
-            position: fixed;
-            bottom: -50px;
-            pointer-events: none;
-            z-index: 15;
-            animation: float 5s linear forwards;
+            position: fixed; top: -20px;
+            user-select: none; pointer-events: none;
+            z-index: 500;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(105vh) rotate(360deg); }
         }
 
-        @keyframes float {
-            to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        #music-toggle {
+            position: fixed; bottom: 20px; right: 20px;
+            background: var(--primary); color: white;
+            width: 50px; height: 50px; border-radius: 50%;
+            border: none; cursor: pointer; z-index: 3000;
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
 
-    <div id="gift-container" onclick="revealLetter()">
-        <div class="gift-box">🎁</div>
-        <div class="tap-text">CLICK TO UNWRAP 💜</div>
+    <div id="password-screen">
+        <h2 style="color: var(--primary);">Authentication Required 🔒</h2>
+        <p>Enter the date it all began (MMDD)</p>
+        <input type="text" id="pass-input" maxlength="4" placeholder="0000">
+        <br><br>
+        <button onclick="unlockVault()" style="background:var(--primary); color:white; border:none; padding:10px 25px; border-radius:12px; cursor:pointer;">Access Memories</button>
     </div>
 
-    <div id="letter-page" class="page-section">
-        <button class="nav-btn close-btn" onclick="resetView()">✕ Close</button>
-        <div class="content-padding">
-            <h1>Happy Monthsary! 💜</h1>
-            <p><strong>To my amazing wife,</strong></p>
-            <p>I wanted to give you something special. Even if I can't be there right now, I want you to know you're always in my heart.</p>
-            <p>Insert your beautiful message here about the Valorant "egg thing," the gym PRs, and February 10th...</p>
-            
-            <div style="margin-top: 50px;">
-                <button class="nav-btn" onclick="showPhotos()">
-                    <span>📖</span> View Our Memories
-                </button>
+    <div id="main-hub" class="hidden" style="text-align: center; width: 90%; max-width: 600px;">
+        <div class="counter-box">
+            <p style="margin: 0; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">Time Spent With My Wife</p>
+            <div id="timer">00d 00h 00m 00s</div>
+        </div>
+
+        <div id="gift-wrapper" class="gift-container" onclick="openGift()">🎁</div>
+
+        <div id="selection-menu" class="hidden">
+            <div class="menu-grid">
+                <div class="card" onclick="showSection('letter')">✉️<br><small>The Letter</small></div>
+                <div class="card" onclick="showSection('milestones')">📖<br><small>Our Milestones</small></div>
+            </div>
+            <p onclick="alert('The egg thing was the best investment ever. 🥚')" style="margin-top: 30px; opacity: 0.5; cursor: pointer;">🥚</p>
+        </div>
+    </div>
+
+    <div id="letter" class="full-page hidden">
+        <button class="close-btn" onclick="hideSection()">← Back</button>
+        <div style="max-width: 600px; margin: 0 auto; line-height: 1.8; text-align: left;">
+            <h1 style="text-align: center; color: var(--primary);">To My Amazing Wife</h1>
+            <p>I still remember Feb 10, 2026 at 11:59pm. That was the moment my life changed forever...</p>
+            <p>Happy first monthsary honey AND MANY MORE TO COME. I just wanted </p>
+            <div style="margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px; font-style: italic;">
+                I love you always,<br>Anthony
             </div>
         </div>
     </div>
 
-    <div id="photo-page" class="page-section">
-        <button class="nav-btn close-btn" onclick="revealLetter()">← Back</button>
-        <div class="content-padding">
-            <h1>Our Story 📖</h1>
-            <p>Every moment with you is a treasure.</p>
-            
-            <div class="photo-grid">
-                <img src="photo1.jpg" alt="Memory 1">
-                <img src="photo2.jpg" alt="Memory 2">
-                <img src="photo3.jpg" alt="Memory 3">
-                <img src="photo4.jpg" alt="Memory 4">
+    <div id="milestones" class="full-page hidden">
+        <button class="close-btn" onclick="hideSection()">← Back</button>
+        <h2 style="text-align: center;">Our Milestones 📖</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <strong>The First Call</strong>
+                <p>The night I joined your call and decided to shoot my shot.</p>
+            </div>
+            <div class="timeline-item">
+                <strong>The "Egg Thing"</strong>
+                <p>Buying that egg on Valorant—the best VP I've ever spent.</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Official Day</strong>
+                <p>February 10, 2026 @ 11:59pm. The start of us.</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Our First Monthsary</strong>
+                <p>Celebrating right now! Many more to come.</p>
             </div>
         </div>
     </div>
+
+    <button id="music-toggle" class="hidden" onclick="toggleMusic()">🎵</button>
+    <audio id="bg-music" loop>
+        <source src="your-song.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
-        let heartInterval;
+        const ANNIVERSARY = "0210"; 
+        const START_TIME = new Date("2026-02-10T23:59:00").getTime();
 
-        function revealLetter() {
-            document.getElementById('gift-container').style.display = 'none';
-            document.getElementById('photo-page').style.display = 'none';
-            document.getElementById('letter-page').style.display = 'block';
-            startHearts();
+        function unlockVault() {
+            const input = document.getElementById('pass-input').value;
+            if(input === ANNIVERSARY) {
+                document.getElementById('password-screen').classList.add('hidden');
+                document.getElementById('main-hub').classList.remove('hidden');
+                document.getElementById('music-toggle').classList.remove('hidden');
+                startTimer();
+                startHeartRain();
+            } else {
+                alert("Only my wife knows the key! ❤️");
+            }
         }
 
-        function showPhotos() {
-            document.getElementById('letter-page').style.display = 'none';
-            document.getElementById('photo-page').style.display = 'block';
+        function startTimer() {
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = now - START_TIME;
+                const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("timer").innerHTML = `${d}d ${h}h ${m}m ${s}s`;
+            }, 1000);
         }
 
-        function resetView() {
-            document.getElementById('letter-page').style.display = 'none';
-            document.getElementById('photo-page').style.display = 'none';
-            document.getElementById('gift-container').style.display = 'flex';
-            stopHearts();
+        function openGift() {
+            document.getElementById('gift-wrapper').classList.add('hidden');
+            document.getElementById('selection-menu').classList.remove('hidden');
         }
 
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            const icons = ['💜', '✨', '🤍', '🌸'];
-            heart.innerText = icons[Math.floor(Math.random() * icons.length)];
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.fontSize = (Math.random() * 20 + 20) + "px";
-            heart.style.duration = (Math.random() * 3 + 2) + "s";
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 5000);
+        function showSection(id) { document.getElementById(id).classList.remove('hidden'); }
+        function hideSection() { 
+            document.querySelectorAll('.full-page').forEach(p => p.classList.add('hidden')); 
         }
 
-        function startHearts() { heartInterval = setInterval(createHeart, 400); }
-        function stopHearts() { clearInterval(heartInterval); }
+        function startHeartRain() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = ["💜", "✨", "💖", "🤍"][Math.floor(Math.random() * 4)];
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+                heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }, 300);
+        }
+
+        function toggleMusic() {
+            const music = document.getElementById('bg-music');
+            music.paused ? music.play() : music.pause();
+        }
     </script>
 </body>
 </html>
