@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Monthsary My Love</title>
+    <style>
+        :root {
+            --bg: #f3e5f5;
+            --gift-color: #7b1fa2;
+            --gift-ribbon: #ffeb3b;
+            --paper: #ffffff;
+            --text: #311b92;
+            --heart-color: #9c27b0;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            background-color: var(--bg);
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+        }
+
+        /* GIFT OVERLAY */
+        #gift-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            cursor: pointer;
+            transition: opacity 0.6s ease;
+        }
+
+        .gift-box {
+            font-size: 10rem;
+            animation: wobble 2s infinite;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-5deg) scale(1.05); }
+            75% { transform: rotate(5deg) scale(1.05); }
+        }
+
+        .tap-text {
+            margin-top: 20px;
+            color: var(--gift-color);
+            font-weight: bold;
+            font-family: sans-serif;
+            letter-spacing: 2px;
+            animation: fade 1.5s infinite alternate;
+        }
+
+        @keyframes fade { from { opacity: 0.4; } to { opacity: 1; } }
+
+        /* CONTENT SECTIONS */
+        .page-section {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--paper);
+            display: none;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .content-padding {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 80px 30px;
+            text-align: center;
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        /* PHOTO GALLERY */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            border-radius: 10px;
+            border: 5px solid var(--bg);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* BUTTONS */
+        .nav-btn {
+            background: var(--gift-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(123, 31, 162, 0.3);
+        }
+
+        .close-btn {
+            position: fixed;
+            top: 20px; right: 20px;
+            z-index: 100;
+            background: rgba(123, 31, 162, 0.8);
+        }
+
+        /* FLOATING HEARTS */
+        .heart {
+            position: fixed;
+            bottom: -50px;
+            pointer-events: none;
+            z-index: 15;
+            animation: float 5s linear forwards;
+        }
+
+        @keyframes float {
+            to { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="gift-container" onclick="revealLetter()">
+        <div class="gift-box">🎁</div>
+        <div class="tap-text">CLICK TO UNWRAP 💜</div>
+    </div>
+
+    <div id="letter-page" class="page-section">
+        <button class="nav-btn close-btn" onclick="resetView()">✕ Close</button>
+        <div class="content-padding">
+            <h1>Happy Monthsary! 💜</h1>
+            <p><strong>To my amazing wife,</strong></p>
+            <p>I wanted to give you something special. Even if I can't be there right now, I want you to know you're always in my heart.</p>
+            <p>Insert your beautiful message here about the Valorant "egg thing," the gym PRs, and February 10th...</p>
+            
+            <div style="margin-top: 50px;">
+                <button class="nav-btn" onclick="showPhotos()">
+                    <span>📖</span> View Our Memories
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="photo-page" class="page-section">
+        <button class="nav-btn close-btn" onclick="revealLetter()">← Back</button>
+        <div class="content-padding">
+            <h1>Our Story 📖</h1>
+            <p>Every moment with you is a treasure.</p>
+            
+            <div class="photo-grid">
+                <img src="photo1.jpg" alt="Memory 1">
+                <img src="photo2.jpg" alt="Memory 2">
+                <img src="photo3.jpg" alt="Memory 3">
+                <img src="photo4.jpg" alt="Memory 4">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let heartInterval;
+
+        function revealLetter() {
+            document.getElementById('gift-container').style.display = 'none';
+            document.getElementById('photo-page').style.display = 'none';
+            document.getElementById('letter-page').style.display = 'block';
+            startHearts();
+        }
+
+        function showPhotos() {
+            document.getElementById('letter-page').style.display = 'none';
+            document.getElementById('photo-page').style.display = 'block';
+        }
+
+        function resetView() {
+            document.getElementById('letter-page').style.display = 'none';
+            document.getElementById('photo-page').style.display = 'none';
+            document.getElementById('gift-container').style.display = 'flex';
+            stopHearts();
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            const icons = ['💜', '✨', '🤍', '🌸'];
+            heart.innerText = icons[Math.floor(Math.random() * icons.length)];
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+            heart.style.duration = (Math.random() * 3 + 2) + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+
+        function startHearts() { heartInterval = setInterval(createHeart, 400); }
+        function stopHearts() { clearInterval(heartInterval); }
+    </script>
+</body>
+</html>
