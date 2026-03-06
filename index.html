@@ -175,7 +175,7 @@
                 <div class="card" onclick="showSection('letter')">✉️<br><small>The Letter</small></div>
                 <div class="card" onclick="showSection('milestones')">📖<br><small>Our Milestones</small></div>
             </div>
-            <p onclick="alert('The egg thing was the best investment ever. 🥚')" style="margin-top: 30px; opacity: 0.5; cursor: pointer;">🥚</p>
+            <p onclick="alert('Joining the call and shooting my shot was the best thing I ever done this year. 🥚')" style="margin-top: 30px; opacity: 0.5; cursor: pointer;">🥚</p>
         </div>
     </div>
 
@@ -231,14 +231,14 @@
 
     <script>
         const ANNIVERSARY = "0210"; 
-        const startTimer = new Date("2026-02-10T23:59:00").getTime();
+        // JavaScript months are 0-indexed (0=Jan, 1=Feb)
+        const START_TIME = new Date(2026, 1, 10, 23, 59, 0).getTime();
 
         function unlockVault() {
             const input = document.getElementById('pass-input').value;
             if(input === ANNIVERSARY) {
                 document.getElementById('password-screen').classList.add('hidden');
                 document.getElementById('main-hub').classList.remove('hidden');
-                document.getElementById('music-toggle').classList.remove('hidden');
                 startTimer();
                 startHeartRain();
             } else {
@@ -250,11 +250,13 @@
             setInterval(() => {
                 const now = new Date().getTime();
                 const distance = now - START_TIME;
+                
                 const d = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const s = Math.floor((distance % (1000 * 60)) / 1000);
-                document.getElementById("timer").innerHTML = `${d}d ${h}h ${m}m ${s}s`;
+                
+                document.getElementById("timer").innerHTML = d + "d " + h + "h " + m + "m " + s + "s";
             }, 1000);
         }
 
@@ -263,7 +265,10 @@
             document.getElementById('selection-menu').classList.remove('hidden');
         }
 
-        function showSection(id) { document.getElementById(id).classList.remove('hidden'); }
+        function showSection(id) { 
+            document.getElementById(id).classList.remove('hidden'); 
+        }
+
         function hideSection() { 
             document.querySelectorAll('.full-page').forEach(p => p.classList.add('hidden')); 
         }
@@ -279,8 +284,6 @@
                 document.body.appendChild(heart);
                 setTimeout(() => heart.remove(), 5000);
             }, 300);
-        }
-
         }
     </script>
 </body>
