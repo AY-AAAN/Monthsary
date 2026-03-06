@@ -231,7 +231,7 @@
 
     <script>
         const ANNIVERSARY = "0210"; 
-        const START_TIME = new Date("2026-02-10T23:59:00").getTime();
+        const startTimer = new Date("2026-02-10T23:59:00").getTime();
 
         function unlockVault() {
             const input = document.getElementById('pass-input').value;
@@ -281,9 +281,6 @@
             }, 300);
         }
 
-        function toggleMusic() {
-            const music = document.getElementById('bg-music');
-            music.paused ? music.play() : music.pause();
         }
     </script>
 </body>
