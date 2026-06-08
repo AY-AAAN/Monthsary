@@ -150,6 +150,25 @@
             border: none; cursor: pointer; z-index: 3000;
             font-size: 1.2rem;
         }
+
+        /* STYLING COPIED FROM MONTH 3 BUTTON */
+        .secret-btn {
+            background: #7b1fa2;
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(123, 31, 162, 0.3);
+            margin-top: 20px;
+        }
+        .secret-btn:hover {
+            background: #4a148c;
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
@@ -174,7 +193,9 @@
             <div class="menu-grid">
                 <div class="card" onclick="showSection('letter')">✉️<br><small>Month 1</small></div>
                 <div class="card" onclick="showSection('letter2')">✉️<br><small>Month 2</small></div>
-                <div class="card" onclick="showSection('milestones')">📖<br><small>Our Milestones</small></div>
+                <div class="card" onclick="showSection('letter3')">✉️<br><small>Month 3</small></div>
+                <div class="card" onclick="showSection('letter4')">✉️<br><small>Month 4</small></div>
+                <div class="card" style="grid-column: span 2;" onclick="showSection('milestones')">📖<br><small>Our Milestones</small></div>
             </div>
             <p onclick="alert('Joining the call and shooting my shot was the best thing I have done this year. 🥚')" style="margin-top: 30px; opacity: 0.5; cursor: pointer;">🥚</p>
         </div>
@@ -209,6 +230,39 @@
             <p>I can't believe it has been 2 months already it felt like we have been together for years we had so many things happen within this month of ours and I can't wait to spend more months with you</p>
             <p>Not only do I want to spend months but years decades and even every lifetime I would still pick to be with you I love you so so much. </p>
             <div style="margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px; font-style: italic;">Forever yours,<br>Anthony</div>
+        </div>
+    </div>
+
+    <div id="letter3" class="full-page hidden">
+        <button class="close-btn" onclick="hideSection()">← Back</button>
+        <div style="max-width: 600px; margin: 0 auto; line-height: 1.8; text-align: center;">
+            <div style="font-size: 55px; margin: 15px 0;">💜</div>
+            <h1 style="color: #6a1b9a;">Happy Monthsary!</h1>
+            
+            <div style="line-height: 1.8; font-size: 1.1rem; margin-bottom: 30px; text-align: left; white-space: pre-wrap; color: #4a148c;">
+To my Loving Wife,
+
+Another month has passed, and my love for you still grows we have had our ups and downs but we learned from them and became stronger than ever Iloveyousosomuch my love and may our relationship last longer than space grows.
+
+I love being with you. Happy 3rd Monthsary my Love!
+            </div>
+
+            <div style="font-weight: bold; color: #ab47bc; font-size: 0.9rem; letter-spacing: 1px;">MAY 10, 2026</div>
+            <br>
+            <button class="secret-btn" onclick="alert('You make my life colorful and better! 💜')">A Little Secret...</button>
+        </div>
+    </div>
+
+    <div id="letter4" class="full-page hidden">
+        <button class="close-btn" onclick="hideSection()">← Back</button>
+        <div style="max-width: 600px; margin: 0 auto; line-height: 1.8; text-align: left;">
+            <h1 style="text-align: center; color: var(--primary);">Happy 4th Monthsary!</h1>
+            <p>To my beautiful, loving, sweet, caring, and moody wife,</p>
+            <p>Happy fourth monthsary! Four months of completely loving you, laughing with you, and building our future step by step. Every day with you is a blessing, and I am so proud of us.</p>
+            <p>I cant believe that we have been together for so long and made an achievement we had an IRL date</p>
+            <p>We have made so much memories and did many things in our first ever date watched movie food date biliards etc.</p>
+            <p>I cant wait to have another date with you my love Iloveyousosomuch mwah sana mag jollibee date tayo pag nag kita hehe</p>
+            <div style="margin-top: 50px; border-top: 1px solid #eee; padding-top: 20px; font-style: italic;">Deeply in love with you,<br>Anthony</div>
         </div>
     </div>
 
@@ -270,8 +324,36 @@
                 <strong>Promise made</strong>
                 <p>I confessed about taking loans and doing stuff just to get you gifts and you wanted me to make a promise that I dont do that again and spoil you when we live together (I will try my best)</p>
             </div>
-            <strong>Our Second Monthsary</strong>
+            <div class="timeline-item">
+                <strong>Our Second Monthsary</strong>
                 <p>Celebrating right now! Iloveyousosomuch my moody baby I cant wait to have more and more till we grow old together.</p>
+            </div>
+            
+            <div class="timeline-item">
+                <strong>Third Month</strong>
+            </div>
+            <div class="timeline-item">
+                <strong>Our Third Monthsary</strong>
+                <p>May 10, 2026. Another milestone hit! Stronger through our ups and downs.</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Gifts</strong>
+                <p>I got you Jollibee when you were feeling sick</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Valorant bundle</strong>
+                <p>We bought each other the duo's bundle and you got me the new vandal so we match</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Meet up</strong>
+                <p>Our first ever meetup we watched a movie, played billiards, arcade date, and food date.</p>
+            </div>
+            <div class="timeline-item">
+                <strong>Fourth Month</strong>
+            </div>
+            <div class="timeline-item">
+                <strong>Our Fourth Monthsary</strong>
+                <p>Celebrating 4 months together! June 10, 2026.</p>
             </div>
         </div>
     </div>
